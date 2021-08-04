@@ -1,4 +1,4 @@
-
+#this is the work flow for analyzing the snATAC-seq using the files generated for each sample from CellRangerATAC 1.2.0 and the mm10 assembly.
 library(Signac)#v1.2.0
 library(Seurat)#v4.0.0
 library(GenomeInfoDb)
@@ -370,12 +370,12 @@ combined.harmony <- NormalizeData(
   scale.factor = median(combined.harmony$nCount_RNA))
 
 #save combined.harmony as ATAC2021.rds
-saveRDS(combined.harmony, file = "/data/scratch/hyndmank/Humphreys/test/ATAC2021.rds")
-save.image("/scratch/hyndmank/Humphreys/test/ATAC.RData")
+saveRDS(combined.harmony, file = "/data/scratch/ATAC2021.rds")
+save.image("/scratch/h/ATAC.RData")
 
 #Integrating with scRNA-seq data, Load the pre-processed scRNA-seq data
-ATAC2021 <- readRDS("/data/scratch/hyndmank/Humphreys/test/ATAC2021.rds")
-RNA2021_harm <- readRDS("/data/scratch/hyndmank/Humphreys/test/RNA2021_harm.rds")
+ATAC2021 <- readRDS("/data/scratch/ATAC2021.rds")
+RNA2021_harm <- readRDS("/data/scratch/RNA2021_harm.rds")
 DefaultAssay(ATAC2021) <- 'RNA'
 DefaultAssay(RNA2021_harm) <- 'RNA'
 
@@ -409,7 +409,7 @@ figS3a
 
 #FindAllMarkers for positive markers only in each cluster, must be in assay 'RNA'
 combined.markers <- FindAllMarkers(ATAC2021, only.pos = TRUE, min.pct = 0.5, logfc.threshold = 0.58)
-write.csv(combined.markers, "/data/scratch/hyndmank/Humphreys/test/khATAC2mergeb.markers.csv", quote = F)
+write.csv(combined.markers, "/data/scratch/khATAC2merge.markers.csv", quote = F)
 
 #rename the clusters
 ATAC2021 <- RenameIdents(ATAC2021, '0' = "mTAL", '1' = "mPTS1", '2' = "fPTS1", '3' = "cTAL", '4' = "EC1", '5' = "DCT1", '6' = "mPTS2", '7' = "fPTS2", '8' = "mPTS2", '9' = "fPTS2", '10' = "DCT2", '11' = "fPTS1", '12' = "Stromal",  '13' = "PT", '14' = "CDPC", '15' = "fPTS3", '16' = "mPTS3", '17' = "EC2", '18' = "mPTS3", '19' = "IC", '20' = "fPTS3", '21' = "PT5", '22' = "Monocytes", '23' = "Novel",'24' = "Podocyte", '25' = "Stromal", '26' = "Monocytes")
@@ -422,7 +422,7 @@ levels(ATAC2021) <- c("Podocyte", "EC1", "EC2", "Stromal", "mPTS1","fPTS1","mPTS
 #export barcode ids
 Idents(ATAC2021) <- "celltype"
 ATAC_barcodes <-Idents(ATAC2021)
-write.csv(ATAC_barcodes, file = "/data/scratch/hyndmank/Humphreys/test/Final/ATACbarcodes.csv")
+write.csv(ATAC_barcodes, file = "/data/scratch/Final/ATACbarcodes.csv")
 
 #Dimplots for snRNA and snATAC
 p8 <- DimPlot(object = RNA2021_harm, label = FALSE, pt.size = 0.1) + NoLegend() + ggplot2::ggtitle("snRNA-seq")
@@ -475,43 +475,43 @@ DiffGenesPod <- FindMarkers(ATAC2021, ident.1 = "Podocyte_con", ident.2 = "Podoc
 open <- rownames(DiffGenesPod)  
 cf <- ClosestFeature(ATAC2021, regions = open)
 Pod <-(cbind(DiffGenesPod, gene=cf$gene_name, distance=cf$distance))
-write.xlsx(Pod, file = "/data/scratch/hyndmank/Humphreys/test/Genotype_DAC/Pod.xlsx")
+write.xlsx(Pod, file = "/data/scratch/Genotype_DAC/Pod.xlsx")
 
 DiffGenesCDPC <- FindMarkers(ATAC2021, ident.1 = "CDPC_con", ident.2 = "CDPC_ko", min.pct = 0.2, test.use = 'LR', logfc.threshold = 0.25, latent.vars = 'peak_region_fragments')
 open <- rownames(DiffGenesCDPC)  
 cf <- ClosestFeature(ATAC2021, regions = open)
 CDPC <-(cbind(DiffGenesCDPC, gene=cf$gene_name, distance=cf$distance))
-write.xlsx(CDPC, file = "/data/scratch/hyndmank/Humphreys/test/Genotype_DAC/CDPC.xlsx")
+write.xlsx(CDPC, file = "/data/scratch/Genotype_DAC/CDPC.xlsx")
 
 DiffGenesmPTS1 <- FindMarkers(ATAC2021, ident.1 = "mPTS1_con", ident.2 = "mPTS1_ko", min.pct = 0.2, test.use = 'LR', logfc.threshold = 0.25, latent.vars = 'peak_region_fragments')
 open <- rownames(DiffGenesmPTS1)  
 cf <- ClosestFeature(ATAC2021, regions = open)
 mPTS1 <-(cbind(DiffGenesmPTS1, gene=cf$gene_name, distance=cf$distance))
-write.xlsx(mPTS1, file = "/data/scratch/hyndmank/Humphreys/test/Genotype_DAC/mPTS1.xlsx")
+write.xlsx(mPTS1, file = "/data/scratch/Genotype_DAC/mPTS1.xlsx")
 
 DiffGenesmPTS2 <- FindMarkers(ATAC2021, ident.1 = "mPTS2_con", ident.2 = "mPTS2_ko", min.pct = 0.2, test.use = 'LR', logfc.threshold = 0.25, latent.vars = 'peak_region_fragments')
 open <- rownames(DiffGenesmPTS2)  
 cf <- ClosestFeature(ATAC2021, regions = open)
 mPTS2 <-(cbind(DiffGenesmPTS2, gene=cf$gene_name, distance=cf$distance))
-write.xlsx(mPTS2, file = "/data/scratch/hyndmank/Humphreys/test/Genotype_DAC/mPTS2.xlsx")
+write.xlsx(mPTS2, file = "/data/scratch/Genotype_DAC/mPTS2.xlsx")
 
 DiffGenesmPTS3 <- FindMarkers(ATAC2021, ident.1 = "mPTS3_con", ident.2 = "mPTS3_ko", min.pct = 0.2, test.use = 'LR', logfc.threshold = 0.25, latent.vars = 'peak_region_fragments')
 open <- rownames(DiffGenesmPTS3)  
 cf <- ClosestFeature(ATAC2021, regions = open)
 mPTS3 <-(cbind(DiffGenesmPTS3, gene=cf$gene_name, distance=cf$distance))
-write.xlsx(mPTS3, file = "/data/scratch/hyndmank/Humphreys/test/Genotype_DAC/mPTS3.xlsx")
+write.xlsx(mPTS3, file = "/data/scratch/Genotype_DAC/mPTS3.xlsx")
 
 DiffGenesfPTS1 <- FindMarkers(ATAC2021, ident.1 = "fPTS1_con", ident.2 = "fPTS1_ko", min.pct = 0.2, test.use = 'LR', logfc.threshold = 0.25, latent.vars = 'peak_region_fragments')
 open <- rownames(DiffGenesfPTS1)  
 cf <- ClosestFeature(ATAC2021, regions = open)
 fPTS1 <-(cbind(DiffGenesfPTS1, gene=cf$gene_name, distance=cf$distance))
-write.xlsx(fPTS1, file = "/data/scratch/hyndmank/Humphreys/test/Genotype_DAC/fPTS1.xlsx")
+write.xlsx(fPTS1, file = "/data/scratch/Genotype_DAC/fPTS1.xlsx")
 
 DiffGenesfPTS2 <- FindMarkers(ATAC2021, ident.1 = "fPTS2_con", ident.2 = "fPTS2_ko", min.pct = 0.2, test.use = 'LR', logfc.threshold = 0.25, latent.vars = 'peak_region_fragments')
 open <- rownames(DiffGenesfPTS2)  
 cf <- ClosestFeature(ATAC2021, regions = open)
 fPTS2 <-(cbind(DiffGenesfPTS2, gene=cf$gene_name, distance=cf$distance))
-write.xlsx(fPTS2, file = "/data/scratch/hyndmank/Humphreys/test/Genotype_DAC/fPTS2.xlsx")
+write.xlsx(fPTS2, file = "/data/scratch/Genotype_DAC/fPTS2.xlsx")
 
 DiffGenesfPTS3 <- FindMarkers(ATAC2021, ident.1 = "fPTS3_con", ident.2 = "fPTS3_ko", min.pct = 0.2, test.use = 'LR', logfc.threshold = 0.25, latent.vars = 'peak_region_fragments')
 open <- rownames(DiffGenesfPTS3)  
@@ -559,33 +559,33 @@ DiffGenesmTAL <- FindMarkers(ATAC2021, ident.1 = "mTAL_con", ident.2 = "mTAL_ko"
 open <- rownames(DiffGenesmTAL)  
 cf <- ClosestFeature(ATAC2021, regions = open)
 mTAL <-(cbind(DiffGenesmTAL, gene=cf$gene_name, distance=cf$distance))
-write.xlsx(mTAL, file = "/data/scratch/hyndmank/Humphreys/test/Genotype_DAC/mTAL.xlsx")
+write.xlsx(mTAL, file = "/data/scratch/Genotype_DAC/mTAL.xlsx")
 
 DiffGenesIC <- FindMarkers(ATAC2021, ident.1 = "IC_con", ident.2 = "IC_ko", min.pct = 0.2, test.use = 'LR', logfc.threshold = 0.25, latent.vars = 'peak_region_fragments')
 open <- rownames(DiffGenesIC)  
 cf <- ClosestFeature(ATAC2021, regions = open)
 IC <-(cbind(DiffGenesIC, gene=cf$gene_name, distance=cf$distance))
-write.xlsx(IC, file = "/data/scratch/hyndmank/Humphreys/test/Genotype_DAC/IC.xlsx")
+write.xlsx(IC, file = "/data/scratch/Genotype_DAC/IC.xlsx")
 
 DiffGenesstromal <- FindMarkers(ATAC2021, ident.1 = "Stromal_con", ident.2 = "Stromal_ko", min.pct = 0.2, test.use = 'LR', logfc.threshold = 0.25, latent.vars = 'peak_region_fragments')
 open <- rownames(DiffGenesstromal)  
 cf <- ClosestFeature(ATAC2021, regions = open)
 Stromal <-(cbind(DiffGenesstromal, gene=cf$gene_name, distance=cf$distance))
-write.xlsx(Stromal, file = "/data/scratch/hyndmank/Humphreys/test/Genotype_DAC/Stromal.xlsx")
+write.xlsx(Stromal, file = "/data/scratch/Genotype_DAC/Stromal.xlsx")
 
 DiffGenesNovel <- FindMarkers(ATAC2021, ident.1 = "Novel_con", ident.2 = "Novel_ko", min.pct = 0.2, test.use = 'LR', logfc.threshold = 0.25, latent.vars = 'peak_region_fragments')
 open <- rownames(DiffGenesNovel)  
 cf <- ClosestFeature(ATAC2021, regions = open)
 Novel <-(cbind(DiffGenesNovel, gene=cf$gene_name, distance=cf$distance))
-write.xlsx(Novel, file = "/data/scratch/hyndmank/Humphreys/test/Genotype_DAC/Novel.xlsx")
+write.xlsx(Novel, file = "/data/scratch/Genotype_DAC/Novel.xlsx")
 
 DiffGenesMonocytes <- FindMarkers(ATAC2021, ident.1 = "Monocytes_con", ident.2 = "Monocytes_ko", min.pct = 0.2, test.use = 'LR', logfc.threshold = 0.25, latent.vars = 'peak_region_fragments')
 open <- rownames(DiffGenesMonocytes)  
 cf <- ClosestFeature(ATAC2021, regions = open)
 Monocytes <-(cbind(DiffGenesMonocytes, gene=cf$gene_name, distance=cf$distance))
-write.xlsx(Monocytes, file = "/data/scratch/hyndmank/Humphreys/test/Genotype_DAC/Monocytes.xlsx")
+write.xlsx(Monocytes, file = "/data/scratch/Genotype_DAC/Monocytes.xlsx")
 
-saveRDS(ATAC2021, file = "/data/scratch/hyndmank/Humphreys/test/Final/ATAC2021.rds")
-saveRDS(RNA2021_harm, file = "/data/scratch/hyndmank/Humphreys/test/Final/RNA2021_harm.rds")
+saveRDS(ATAC2021, file = "/data/scratch/Final/ATAC2021.rds")
+saveRDS(RNA2021_harm, file = "/data/scratch/Final/RNA2021_harm.rds")
 #combine all xlsx into one file
 #now moved on to DACvs DEG.R code
