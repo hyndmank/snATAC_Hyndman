@@ -7,6 +7,8 @@ Thank you to the Humphreys lab for their code from:  Muto Y, Wilson PC, Ledru N,
 Single cell transcriptional and chromatin accessibility profiling redefine cellular heterogeneity in the adult human kidney. 
 Nat Commun. 2021 Apr 13;12(1):2190. doi: 10.1038/s41467-021-22368-w. [PMID: 33850129](https://pubmed.ncbi.nlm.nih.gov/33850129/) and found on [GitHub](https://github.com/p4rkerw/Muto_Wilson_NComm_2020) <br><br>
 
+Thank you to the Satija lab for Seurat and Signac and their wonderful vignettes and [publications](https://satijalab.org/seurat/authors.html) 
+
 <b>Study Samples <br></b>
 We have a colony of <i>Hdac1<sup> fl/fl</sup> Hdac2<sup> fl/fl</sup></i> mice developed by Dr. Eric Olson [PMID: 17639084](https://pubmed.ncbi.nlm.nih.gov/17639084/).  These mice were bred for multiple generations with doxycycline-inducible Pax8-reverse tetracycline transactivator (rtTA) and the bicistronic Cre (LC-1) hemizygous mice. Control mice are homozygous floxed for <i> Hdac1 and Hdac2 </i> but are Pax8-rtTA/LC-1 negative.  Knockdown mice are homozygous floxed for <i> Hdac1 and Hdac2 </i> and are Pax8-rtTA/LC-1 hemizygous.  Induction of kidney epithelial knockdown occured at 6 weeks of age by providing doxcyline water for 7 days followed by 7 days of tap water.  Male and female mice were euthanized and kidney samples collected for histological and single nucleus analyses.
 
