@@ -1,5 +1,5 @@
 README
-# <p align="center"><b>Histone deacetylase-1 (HDAC1) and HDAC2 changes to the kidney epithelium chromatin and transcriptome landscape.</hx></b></br>
+# <p align="center"><b>Histone deacetylase-1 (HDAC1) and HDAC2 changes to the kidney epithelium chromatin and transcriptome landscapes.</hx></b></br>
 <p align="center"> Kelly A. Hyndman and David Crossman <br>
 University of Alabama at Birmingham <br></c>
 
