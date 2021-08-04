@@ -12,7 +12,7 @@ We have a colony of <i>Hdac1<sup> fl/fl</sup> Hdac2<sup> fl/fl</sup></i> mice de
 
 
 
-Publications associated with these datasets </br>
+<b>Publications associated with these datasets </br></b>
 
 Hyndman KA, Speed JS, Mendoza LD, Allan JM et al. Fluid-electrolyte homeostasis requires histone deacetylase function. 
 JCI Insight 2020 Aug 20;5(16). [PMID: 32673289](https://pubmed.ncbi.nlm.nih.gov/32673289/) <br>
