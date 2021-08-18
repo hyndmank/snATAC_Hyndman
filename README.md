@@ -1,6 +1,6 @@
 README
 # <p align="center"><b>Histone deacetylase-1 (HDAC1) and HDAC2 regulation of the kidney epithelium chromatin and transcriptome landscapes.</hx></b></br>
-<p align="center"> Kelly A. Hyndman and David Crossman <br>
+<p align="center"> Kelly A. Hyndman and David K. Crossman <br>
 University of Alabama at Birmingham <br></c>
 
 Thank you to the Humphreys lab for their code from:  Muto Y, Wilson PC, Ledru N, Wu H, Dimke H, Waikar SS, Humphreys BD.
