@@ -15,7 +15,7 @@ We have a colony of <i>Hdac1<sup> fl/fl</sup> Hdac2<sup> fl/fl</sup></i> mice de
 
 
 <b>Publications associated with these datasets </br></b>
-Hyndman KA and Crossman DK. 2021. Kidney cell type specific changes in the chromatin and transcriptome landscapes following epithelial Hdac1 and Hdac2 knockdown. Physiological Genomics, In Press. [PMID: 34890513] (https://pubmed.ncbi.nlm.nih.gov/34890513) /br>
+Hyndman KA and Crossman DK. 2021. Kidney cell type specific changes in the chromatin and transcriptome landscapes following epithelial Hdac1 and Hdac2 knockdown. Physiological Genomics, In Press. [PMID: 34890513](https://pubmed.ncbi.nlm.nih.gov/34890513) /br>
 
 Hyndman KA, Speed JS, Mendoza LD, Allan JM et al. Fluid-electrolyte homeostasis requires histone deacetylase function. 
 JCI Insight 2020 Aug 20;5(16). [PMID: 32673289](https://pubmed.ncbi.nlm.nih.gov/32673289/) <br>
