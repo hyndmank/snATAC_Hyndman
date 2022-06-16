@@ -121,7 +121,7 @@ write.csv(counts.matrix, file = "/data/scratch/RNA2021counts.csv")
 
 output <- "/data/scratch/DEG_"
 Idents(combined.harmony) <- "celltype"
-for (i in (Idents(combined.harmony)))({
+for (i in (levels(combined.harmony)))({
   try({
     ident1 <- paste0(i,"_Con")
     ident2 <- paste0(i,"_KO")
